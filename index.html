@@ -17,6 +17,9 @@ body{font-family:'Cairo',sans-serif;background:#0a0a1a;min-height:100vh;display:
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 @keyframes popIn{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.pop-in{animation:popIn .5s cubic-bezier(.34,1.56,.64,1)!important}
 .avatar{width:110px;height:110px;border-radius:50%;background:#ff4d7e;display:flex;align-items:center;justify-content:center;font-size:3rem;animation:bounce 2.5s infinite;box-shadow:0 0 0 5px rgba(255,77,126,.2),0 0 0 12px rgba(255,77,126,.08)}
 .title{font-size:1.85rem;font-weight:900;color:#ff6b9d}
 .bubble{background:rgba(255,255,255,.07);border:1px solid rgba(255,107,157,.25);border-radius:20px;padding:1.2rem 1.6rem;color:#ffe0f0;font-size:1rem;line-height:2;font-weight:600;width:100%}
@@ -46,6 +49,7 @@ body{font-family:'Cairo',sans-serif;background:#0a0a1a;min-height:100vh;display:
 .t-dot{width:9px;height:9px;border-radius:50%;background:#4ade80;transition:background .3s;flex-shrink:0}
 .t-dot.used{background:#ff4757}
 .cards-4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;width:100%}
+.cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%}
 .card{aspect-ratio:1;perspective:600px;cursor:pointer}
 .card-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .4s}
 .card.flipped .card-inner{transform:rotateY(180deg)}
@@ -54,18 +58,15 @@ body{font-family:'Cairo',sans-serif;background:#0a0a1a;min-height:100vh;display:
 .card-back-f::after{content:'🎴';font-size:1.4rem}
 .card-front-f{background:#1e1044;border:1.5px solid #ff6b9d;transform:rotateY(180deg)}
 .card.matched .card-front-f{background:#0d3a1a;border-color:#4ade80}
+.card-back-g{background:#1a140a;border:1.5px solid rgba(251,191,36,.3)}
+.card-back-g::after{content:'🎁';font-size:1.8rem}
+.card-front-g{background:#0f1f0a;border:1.5px solid #fbbf24;transform:rotateY(180deg);font-size:1.1rem;flex-direction:column;gap:3px}
 .result-big{font-size:5rem;animation:bounce 1s infinite}
 .love-footer{color:rgba(255,255,255,.45);font-size:.85rem;font-weight:600;margin-top:.5rem;position:relative}
 .confetti-p{position:fixed;width:9px;height:9px;animation:confFall linear forwards;pointer-events:none;z-index:999}
 @keyframes confFall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
 
-/* 🎪 ستايل عجلة الحظ المحدث والرهيب لـلخريج */
-.wheel-container { position: relative; width: 280px; height: 280px; margin: 15px auto; }
-.wheel { width: 100%; height: 100%; border-radius: 50%; border: 6px solid #fbbf24; background: conic-gradient(#ff4d7e 0deg 60deg, #16a34a 60deg 120deg, #1e1044 120deg 180deg, #fbbf24 180deg 240deg, #60a5fa 240deg 300deg, #8b5cf6 300deg 360deg); transition: transform 4s cubic-bezier(0.1, 0.8, 0.25, 1); box-shadow: 0 0 20px rgba(251,191,36,0.4); }
-.wheel-pointer { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 14px solid transparent; border-right: 14px solid transparent; border-top: 25px solid #fff; filter: drop-shadow(0 3px 5px rgba(0,0,0,0.5)); z-index: 10; }
-.wheel-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 45px; height: 45px; background: #fff; border-radius: 50%; box-shadow: 0 0 10px rgba(0,0,0,0.5); z-index: 5; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-
-/* 📊 ستايل لوحة التحكم السرية للمسؤول */
+/* ستايل لوحة التحكم السرية بنفس روح الألوان */
 .secret-dot { position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); width: 25px; height: 25px; background: rgba(255,255,255,0.01); cursor: pointer; z-index: 999; }
 .dashboard-overlay { background: rgba(10, 10, 26, 0.98); position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; z-index: 1000; overflow-y: auto; border: 2px solid #ff6b9d; box-shadow: 0 0 30px rgba(255,107,157,0.3); }
 .dash-header { color: #fff; font-size: 1.4rem; font-weight: 900; margin-bottom: 15px; background: #ff4d7e; width: 100%; padding: 12px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(255,77,126,0.3); }
@@ -80,6 +81,7 @@ tr:nth-child(even) { background: rgba(255,255,255,0.03); }
 <div class="stars-bg" id="stars"></div>
 <div id="app">
 
+<!-- 1. INTRO -->
 <div id="s-intro" class="screen active">
   <div class="avatar">👩‍🏫</div>
   <div class="title">بشمهندسة رحومة</div>
@@ -95,10 +97,12 @@ tr:nth-child(even) { background: rgba(255,255,255,0.03); }
   
   <div class="love-footer">
     وبحبك يا صديقي اللي لعب اللعبة 🌸
+    <!-- الزرار المخفي السحري تحت الكلمة مباشرة -->
     <div class="secret-dot" onclick="openSecretPanel()"></div>
   </div>
 </div>
 
+<!-- 2. CHOICE -->
 <div id="s-choice" class="screen">
   <div style="font-size:3.5rem;animation:bounce 2s infinite">👩‍🏫</div>
   <div class="bubble" id="choiceMsg"></div>
@@ -108,6 +112,7 @@ tr:nth-child(even) { background: rgba(255,255,255,0.03); }
   </div>
 </div>
 
+<!-- 3A. STUDENT INTRO -->
 <div id="s-student-intro" class="screen">
   <div style="font-size:4rem;animation:bounce 1s infinite">📚</div>
   <div class="big-name red" id="studIntroName"></div>
@@ -122,18 +127,21 @@ tr:nth-child(even) { background: rgba(255,255,255,0.03); }
   <button class="btn-main" onclick="startStudentGame()">العب 🎮</button>
 </div>
 
+<!-- 3B. GRAD INTRO -->
 <div id="s-grad-intro" class="screen">
-  <div style="font-size:4rem;animation:bounce 1s infinite">🎡</div>
+  <div style="font-size:4rem;animation:bounce 1s infinite">🎊</div>
   <div class="big-name gold" id="gradIntroName"></div>
   <div class="bubble gold">
     يا بختك وأنا نفسي كمان! 😭🎓<br>
     خلصت تعليم من زمان؟<br>
-    تعال جرب حظك وشوف هديتك من رحومة 🥰<br>
-    <strong>لف العجلة السحرية وشوف هيطلعلك إيه!</strong>
+    يلا نلعب أنا وأنت يا إنسان 🥰<br>
+    لعبة غير ومختلفة تماماً<br>
+    <strong>يلا بينا!</strong>
   </div>
-  <button class="btn-green" onclick="startGradGame()">ادخل جرب حظك 🚀</button>
+  <button class="btn-green" onclick="startGradGame()">العب معايا 🎁</button>
 </div>
 
+<!-- 4A. STUDENT GAME -->
 <div id="s-student-game" class="screen">
   <div style="color:#ff6b9d;font-size:.95rem;font-weight:900">🎴 ادور على الأزواج — عندك 15 فرصة</div>
   <div class="game-header">
@@ -144,19 +152,19 @@ tr:nth-child(even) { background: rgba(255,255,255,0.03); }
   <div class="cards-4" id="sGrid"></div>
 </div>
 
+<!-- 4B. GRAD GAME -->
 <div id="s-grad-game" class="screen">
-  <div style="color:#fbbf24;font-size:.95rem;font-weight:900">🎡 عجلة الحظ للخريجين الرايقين</div>
-  
-  <div class="wheel-container">
-    <div class="wheel-pointer"></div>
-    <div class="wheel" id="wheel"></div>
-    <div class="wheel-center">🎓</div>
+  <div style="color:#fbbf24;font-size:.95rem;font-weight:900">🎁 افتح الهدايا — ادور على القلب!</div>
+  <div class="game-header">
+    <div class="stat"><span class="stat-label">فتحت</span><span class="stat-val gold" id="gOpened">0</span></div>
+    <div class="stat"><span class="stat-label">قلوب</span><span class="stat-val gold" id="gHearts">0</span></div>
+    <div class="stat"><span class="stat-label">متبقي</span><span class="stat-val gold" id="gLeft">9</span></div>
   </div>
-
-  <button class="btn-green" id="spinBtn" onclick="spinWheel()">لف العجلة السحرية 🎡</button>
-  <div id="gMsg" style="color:#fde68a;font-size:1rem;font-weight:700;min-height:24px;margin-top:10px"></div>
+  <div class="cards-3" id="gGrid"></div>
+  <div id="gMsg" style="color:#fde68a;font-size:.9rem;font-weight:700;min-height:24px"></div>
 </div>
 
+<!-- 5A. STUDENT WIN -->
 <div id="s-student-win" class="screen">
   <div class="result-big">🏆</div>
   <div class="big-name green" id="sWinName"></div>
@@ -172,6 +180,7 @@ tr:nth-child(even) { background: rgba(255,255,255,0.03); }
   <button class="btn-ghost" onclick="startStudentGame()">تاني 🔄</button>
 </div>
 
+<!-- 5B. STUDENT LOSE -->
 <div id="s-student-lose" class="screen">
   <div class="result-big">💀</div>
   <div class="big-name red" id="sLoseName"></div>
@@ -186,19 +195,38 @@ tr:nth-child(even) { background: rgba(255,255,255,0.03); }
   <button class="btn-ghost" onclick="startStudentGame()">فرصة تانية 🙏</button>
 </div>
 
+<!-- 5C. GRAD WIN -->
 <div id="s-grad-win" class="screen">
-  <div class="result-big">🥳</div>
+  <div class="result-big">🥰</div>
   <div class="big-name gold" id="gWinName"></div>
   <div class="sub-card" style="border-color:rgba(251,191,36,.2);background:rgba(251,191,36,.06)">
-    رحومة بتباركلك وبتقولك الجايزة بتاعتك هي:<br>
-    <strong id="finalPrize" style="color: #fbbf24; font-size: 1.3rem;"></strong> ✨<br><br>
-    ادعي لأم مرار طافح تخلص وتتخرج هي كمان بسرعة! 🎓😭<br>
-    وربنا يسهلها ويوفقك دايماً في حياتك الجاية 🌸
+    رحومة بتقولك:<br>
+    <strong>حقك تكسب! 🎊</strong><br>
+    ما أنت مش عندك امتحان 😂<br>
+    ادعي لأم مرار طافح تخلص<br>
+    <strong>وتتخرج بسرعة!</strong> 🎓✨<br>
+    ربنا يسهلها إن شاء الله 🌸
   </div>
   <div class="love-footer">وبحبك يا صديقي اللي لعب اللعبة 🌸</div>
-  <button class="btn-ghost" onclick="show('s-intro')">الرئيسية 🏠</button>
+  <button class="btn-ghost" onclick="startGradGame()">تاني 🔄</button>
 </div>
 
+<!-- 5D. GRAD LOSE -->
+<div id="s-grad-lose" class="screen">
+  <div class="result-big">😂</div>
+  <div class="big-name red" id="gLoseName"></div>
+  <div class="sub-card">
+    رحومة بتقولك:<br>
+    <strong>يا خسران روح نام! 😂</strong><br>
+    ما أنت مش عندك امتحان أصلاً<br>
+    كل لحمة وادعي لرحومة بقاааа! 🙏<br>
+    وربنا يسهل عليها 😭
+  </div>
+  <div class="love-footer">وبحبك يا صديقي اللي لعب اللعبة 🌸</div>
+  <button class="btn-ghost" onclick="startGradGame()">فرصة تانية 😅</button>
+</div>
+
+<!-- لوحة التحكم المنبثقة المدمجة بالديزاين الجديد -->
 <div id="dashboardOverlay" class="dashboard-overlay" style="display: none;">
   <div class="dash-header">📊 لوحة تحكم البشمهندسة رحومة</div>
   <div style="overflow-x: auto; width: 100%;">
@@ -207,11 +235,12 @@ tr:nth-child(even) { background: rgba(255,255,255,0.03); }
         <tr>
           <th>الاسم</th>
           <th>الفئة</th>
-          <th>النتيجة / الهدية</th>
+          <th>النتيجة</th>
         </tr>
       </thead>
       <tbody id="reportTable">
-        </tbody>
+        <!-- بتظهر البيانات هنا علطول -->
+      </tbody>
     </table>
   </div>
   <button class="close-dash-btn" onclick="closeDashboard()">إغلاق اللوحة ❌</button>
@@ -221,21 +250,20 @@ tr:nth-child(even) { background: rgba(255,255,255,0.03); }
 
 <script>
 let playerName='';
-let playerType='';
+let playerType=''; // لحفظ نوع الفئة
 let sFlipped=[],sMat=0,sTries=0,sLock=false;
-let isSpinning=false;
 const MAXS=15;
 const emojis=['📚','💡','✏️','📐','🖥️','🔬','⚡','🧮'];
 
-// الأصوات بمستوى 100%
+// تعريف الأصوات بأعلى جودة ومستوى صوت 100%
 const sounds = {
   click: new Audio("https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg"),
-  win: new Audio("https://actions.google.com/sounds/v1/human/applause_coarse.ogg")
+  win: new Audio("https://actions.google.com/sounds/v1/human/applause_coarse.ogg") // صوت التسقيف والتشجيع العالي جداً 👏👏🎉
 };
 Object.values(sounds).forEach(sound => sound.volume = 1.0);
 
-// قاعدة البيانات
-let localDB = JSON.parse(localStorage.getItem('game_logs_v3')) || [];
+// قاعدة البيانات المحلية
+let localDB = JSON.parse(localStorage.getItem('game_logs_v2')) || [];
 
 function makeStars(){
   const c=document.getElementById('stars');
@@ -279,10 +307,11 @@ function goGrad(){
   show('s-grad-intro');
 }
 
+// دالة حفظ البيانات التلقائية في اللوحة
 function savePlayerResult(status) {
   const newLog = { name: playerName, type: playerType, result: status };
   localDB.push(newLog);
-  localStorage.setItem('game_logs_v3', JSON.stringify(localDB));
+  localStorage.setItem('game_logs_v2', JSON.stringify(localDB));
 }
 
 // ===== STUDENT GAME =====
@@ -307,7 +336,7 @@ function sFlip(card){
   if(sLock||card.classList.contains('flipped')||card.classList.contains('matched'))return;
   
   sounds.click.currentTime = 0;
-  sounds.click.play().catch(e=>{});
+  sounds.click.play().catch(e=>{}); // صوت ضغطة الكارت
   
   card.classList.add('flipped');sFlipped.push(card);
   if(sFlipped.length===2){
@@ -323,7 +352,7 @@ function sFlip(card){
           document.getElementById('sWinName').textContent=`شاطر يا ${playerName}! 🏆`;
           show('s-student-win');
           sounds.win.currentTime = 0;
-          sounds.win.play().catch(e=>{});
+          sounds.win.play().catch(e=>{}); // تشغيل صوت التسقيف العالي هنا 🎉
           launchConfetti();
           savePlayerResult("كسبان (طالب) 🏆");
         },400);
@@ -340,57 +369,62 @@ function sFlip(card){
   }
 }
 
-// ===== GRAD GAME (عجلة الحظ الدوارة المحدثة) =====
+// ===== GRAD GAME =====
 function startGradGame(){
-  isSpinning = false;
-  document.getElementById('wheel').style.transform = 'rotate(0deg)';
-  document.getElementById('gMsg').textContent = 'اضغط على الزرار وخلّي العجلة تحدد نصيبك! 😉';
-  document.getElementById('spinBtn').style.opacity = '1';
-  document.getElementById('spinBtn').style.pointerEvents = 'auto';
-  show('s-grad-game');
-}
-
-function spinWheel() {
-  if(isSpinning) return;
-  isSpinning = true;
-  
-  document.getElementById('spinBtn').style.opacity = '0.5';
-  document.getElementById('spinBtn').style.pointerEvents = 'none';
-  document.getElementById('gMsg').textContent = 'العجلة بتدور.. جاري اختيار هديتك السحرية! 🎡✨';
-
-  // هدايا العجلة مقسمة على 6 قطاعات (كل قطاع 60 درجة)
-  const prizes = [
-    "وظيفة براتب خيالي 💸💼",
-    "جايزة المرار الطافح الشرفية 🏆😤",
-    "شريك/شريكة الحياة المناسب 💍❤️",
-    "نومة عميقة بدون منبه 😴🛏️",
-    "دعوة حلوة من قلب رحومة 🥰",
-    "سفرية للمالديف وفكك من الشغل ✈️🏖️"
+  let opened=0,hearts=0;
+  const prizes=[
+    {icon:'❤️',label:'قلب',isHeart:true},
+    {icon:'❤️',label:'قلب',isHeart:true},
+    {icon:'❤️',label:'قلب',isHeart:true},
+    {icon:'🎊',label:'تهنئة',isHeart:false},
+    {icon:'🎊',label:'تهنئة',isHeart:false},
+    {icon:'☕',label:'قهوة',isHeart:false},
+    {icon:'🌸',label:'وردة',isHeart:false},
+    {icon:'😂',label:'ضحكة',isHeart:false},
+    {icon:'🎓',label:'تخرج',isHeart:false}
   ];
-
-  // لفة عشوائية كبيرة (بين 5 إلى 10 لفات كاملة + زاوية القطاع العشوائي)
-  const randomDegree = Math.floor(Math.random() * 360);
-  const totalDegrees = (360 * 7) + randomDegree; 
-
-  document.getElementById('wheel').style.transform = `rotate(${totalDegrees}deg)`;
-
-  setTimeout(() => {
-    // حساب الهدية التي وقفت عندها العجلة بناءً على السهم العلوي (الدرجة صفر)
-    const actualDegree = (360 - (totalDegrees % 360)) % 360;
-    const sectorIndex = Math.floor(actualDegree / 60);
-    const selectedPrize = prizes[sectorIndex];
-
-    // توجيه للخريج شاشة النتيجة
-    document.getElementById('gWinName').textContent = `مبروك يا ${playerName}! 🥰`;
-    document.getElementById('finalPrize').textContent = selectedPrize;
-    
-    show('s-grad-win');
-    sounds.win.currentTime = 0;
-    sounds.win.play().catch(e=>{});
-    launchConfetti('#fbbf24');
-    
-    savePlayerResult(`خريج - كسب: ${selectedPrize}`);
-  }, 4000); // تنتهي الحركة بعد 4 ثوانٍ تماماً
+  const shuffled=[...prizes].sort(()=>Math.random()-.5);
+  document.getElementById('gOpened').textContent='0';
+  document.getElementById('gHearts').textContent='0';
+  document.getElementById('gLeft').textContent='9';
+  document.getElementById('gMsg').textContent='';
+  const g=document.getElementById('gGrid');g.innerHTML='';
+  shuffled.forEach(p=>{
+    const c=document.createElement('div');c.className='card';
+    c.innerHTML=`<div class="card-inner"><div class="card-face card-back-g"></div><div class="card-face card-front-g">${p.icon}<span style="font-size:.75rem;color:#fde68a">${p.label}</span></div></div>`;
+    c.onclick=function(){
+      if(c.classList.contains('flipped'))return;
+      
+      sounds.click.currentTime = 0;
+      sounds.click.play().catch(e=>{}); // صوت ضغطة الكارت
+      
+      c.classList.add('flipped');opened++;
+      if(p.isHeart)hearts++;
+      document.getElementById('gOpened').textContent=opened;
+      document.getElementById('gHearts').textContent=hearts;
+      document.getElementById('gLeft').textContent=9-opened;
+      const msgs=['يلا كمل 🎁','ترى في مفاجأة 👀','كمل كمل 😏','قرّبت! 🌟','واو 😲'];
+      document.getElementById('gMsg').textContent=msgs[Math.floor(Math.random()*msgs.length)];
+      if(opened===9){
+        setTimeout(()=>{
+          if(hearts>=2){
+            document.getElementById('gWinName').textContent=`يا ${playerName}! 🥰`;
+            show('s-grad-win');
+            sounds.win.currentTime = 0;
+            sounds.win.play().catch(e=>{}); // تشغيل صوت التسقيف العالي هنا 🎉
+            launchConfetti('#fbbf24');
+            savePlayerResult("كسبان (خريج) 🥰");
+          } else {
+            document.getElementById('gLoseName').textContent=`يا ${playerName}! 😂`;
+            show('s-grad-lose');
+            savePlayerResult("خسران (خريج) 😂");
+          }
+        },600);
+      }
+    };
+    g.appendChild(c);
+  });
+  show('s-grad-game');
 }
 
 function launchConfetti(color){
@@ -400,11 +434,11 @@ function launchConfetti(color){
       const c=document.createElement('div');c.className='confetti-p';
       c.style.cssText=`left:${Math.random()*100}vw;top:0;background:${cols[Math.floor(Math.random()*cols.length)]};border-radius:${Math.random()>.5?'50%':'3px'};animation-duration:${2+Math.random()*1.5}s`;
       document.body.appendChild(c);setTimeout(()=>c.remove(),3500);
-    }, i*40);
+    },i*40);
   }
 }
 
-// فتح لوحة التحكم السرية لرؤية الأسماء والرسائل والهدايا
+// دالة فتح لوحة التحكم السرية
 function openSecretPanel() {
   const pass = prompt("اكتبي الرقم السري لـ رحومة لفتح لوحة التحكم: 🕵️‍♀️");
   if (pass === "1234") {
@@ -415,6 +449,7 @@ function openSecretPanel() {
     if(localDB.length === 0) {
       tableBody.innerHTML = `<tr><td colspan="3" style="padding:20px; color:rgba(255,255,255,0.4);">لسة مفيش حد دخل لعب لغاية دلوقتي 😢</td></tr>`;
     } else {
+      // رص الأسماء من الأحدث للأقدم
       [...localDB].reverse().forEach(player => {
         tableBody.innerHTML += `
           <tr>
