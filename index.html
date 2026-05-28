@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لعبة رحومة السحرية 🌟</title>
+    <title>لوحة تحكم البشمهندسة رحومة 🌟</title>
     <style>
         :root {
             --primary: #ff007f;
@@ -14,7 +14,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow-x: hidden; }
         .container { width: 100%; max-width: 500px; background: var(--card-bg); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(255, 0, 127, 0.2); border: 2px solid var(--primary); text-align: center; position: relative; margin: 15px; }
-        h1 { color: var(--primary); margin-bottom: 20px; font-size: 28px; text-shadow: 0 0 10px rgba(255, 0, 127, 0.5); }
+        h1 { color: var(--primary); margin-bottom: 20px; font-size: 26px; text-shadow: 0 0 10px rgba(255, 0, 127, 0.5); }
         .input-group { margin-bottom: 20px; text-align: right; }
         label { display: block; margin-bottom: 8px; color: #bbb; font-size: 14px; }
         input, select, textarea { width: 100%; padding: 12px; background: #222; border: 1px solid #444; border-radius: 10px; color: #fff; font-size: 16px; transition: 0.3s; }
@@ -30,20 +30,21 @@
         .cell.revealed { background: #fff; color: #000; cursor: default; transform: rotateY(180deg); }
         .cell.bomb { background: #ff3333 !important; color: white; }
         
-        /* لوحة التحكم السرية */
-        .secret-dot { position: absolute; bottom: 5px; left: 5px; width: 8px; height: 8px; background: rgba(255,255,255,0.03); border-radius: 50%; cursor: pointer; }
-        .dashboard { text-align: right; background: #000; border: 2px solid var(--primary); padding: 20px; border-radius: 15px; max-height: 80vh; overflow-y: auto; }
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 13px; }
+        /* لوحة التحكم السرية المحدثة لضبط المظهر في الصورة */
+        .secret-dot { position: absolute; bottom: 5px; left: 5px; width: 12px; height: 12px; background: rgba(255,255,255,0.01); border-radius: 50%; cursor: pointer; }
+        .dashboard { text-align: right; background: #111116; border: 2px solid var(--primary); padding: 20px; border-radius: 15px; }
+        .dash-title { background: linear-gradient(45deg, #ff007f, #b00058); color: white; padding: 12px; border-radius: 10px; font-weight: bold; margin-bottom: 15px; font-size: 18px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; color: #fff; }
         th, td { border: 1px solid #333; padding: 10px; text-align: center; }
-        th { background: var(--primary); color: white; }
-        tr:nth-child(even) { background: #111; }
-        .back-btn { background: #333; box-shadow: none; margin-top: 15px; }
+        th { background: #ff007f; color: white; font-weight: bold; }
+        tr:nth-child(even) { background: #1a1a24; }
+        .close-btn { background: #cc0000; margin-top: 15px; padding: 10px; font-size: 15px; }
     </style>
 </head>
 <body>
 
     <div class="container" id="mainContainer">
-        <!-- شاشة التسجيل -->
+        <!-- شاشة التسجيل البداية -->
         <div id="loginScreen">
             <h1>لعبة المفاجآت 🌟</h1>
             <div class="input-group">
@@ -73,9 +74,9 @@
             <p id="scoreDisplay" style="font-weight: bold; color: var(--primary);">المحاولات الناجحة: 0 / 5</p>
         </div>
 
-        <!-- لوحة التحكم السرية -->
+        <!-- لوحة التحكم السرية المصلحة تماماً -->
         <div id="dashboardScreen" class="hidden">
-            <h2 style="color: var(--primary); margin-bottom: 10px;">🕵️‍♀️ لوحة تحكم رحومة السرية</h2>
+            <div class="dash-title">📊 لوحة تحكم البشمهندسة رحومة</div>
             <div style="overflow-x: auto;">
                 <table>
                     <thead>
@@ -83,40 +84,37 @@
                             <th>الاسم</th>
                             <th>الفئة</th>
                             <th>النتيجة</th>
-                            <th>الرسالة</th>
+                            <th>الرسالة من القلب ❤️</th>
                         </tr>
                     </thead>
                     <tbody id="reportTable">
-                        <!-- البيانات هتنزل هنا تلقائي -->
+                        <!-- هنا بيتم عرض البيانات فوراً وبدون تعليق -->
                     </tbody>
                 </table>
             </div>
-            <button class="back-btn" onclick="closeDashboard()">رجوع للعبة</button>
+            <button class="close-btn" onclick="closeDashboard()">إغلاق ❌</button>
         </div>
 
-        <!-- النقطة المخفية -->
+        <!-- النقطة المخفية أسفل الشاشة -->
         <div class="secret-dot" onclick="openSecretPanel()"></div>
     </div>
 
-    <!-- المؤثرات الصوتية الحديثة -->
     <script>
-        // روابط أصوات مباشرة ومضمونة ومفتوحة للجميع
+        // روابط أصوات جديدة ومباشرة ومفتوحة بدون حظر
         const sounds = {
-            click: new Audio("https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg"), // صوت ضغطة المربع
-            win: new Audio("https://actions.google.com/sounds/v1/cartoon/slide_whistle_up.ogg"), // صوت فوز مبهج
-            lose: new Audio("https://actions.google.com/sounds/v1/cartoon/splat.ogg"), // صوت خسران وكوميدي
-            start: new Audio("https://actions.google.com/sounds/v1/foley/crumple_paper.ogg") // صوت بداية اللعبة
+            click: new Audio("https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg"), 
+            win: new Audio("https://actions.google.com/sounds/v1/human/applause_coarse.ogg"), // صوت تسقيف وتشجيع حقيقي (Clapping) 🎉
+            lose: new Audio("https://actions.google.com/sounds/v1/cartoon/splat.ogg"), 
+            start: new Audio("https://actions.google.com/sounds/v1/foley/crumple_paper.ogg")
         };
 
-        // تقليل مستوى الصوت عشان ميبقاش مزعج جداً
-        Object.values(sounds).forEach(sound => sound.volume = 0.5);
+        Object.values(sounds).forEach(sound => sound.volume = 0.6);
 
         let pName, pRole, pMsg;
         let score = 0;
         const targetWin = 5;
         let gameOver = false;
         
-        // خريطة اللوحة (0: كنز، 1: قنبلة)
         const boardData = [
             0, 1, 0, 0,
             0, 0, 1, 0,
@@ -124,7 +122,7 @@
             0, 0, 1, 0
         ];
 
-        // مصفوفة وهمية لحفظ البيانات محلياً لو مفيش Firebase شغال فوراً
+        // مصفوفة حفظ وقراءة البيانات للتأكد من أنها تظهر فوراً
         let localDB = JSON.parse(localStorage.getItem('game_logs')) || [];
 
         function startGame() {
@@ -133,12 +131,11 @@
             pMsg = document.getElementById('playerMsg').value.trim();
 
             if(!pName) {
-                alert("من فضلك اكتب اسمك الأول عشان ندخل اللعبة! 😊");
+                alert("من فضلك اكتب اسمك الأول عشان تدخل اللعبة! 😊");
                 return;
             }
 
-            // تشغيل صوت البداية بعد تفاعل المستخدم
-            sounds.start.play().catch(e => console.log("الصوت يحتاج تفاعل"));
+            sounds.start.play().catch(e => {});
 
             document.getElementById('loginScreen').classList.add('hidden');
             document.getElementById('gameScreen').classList.remove('hidden');
@@ -149,14 +146,12 @@
         function generateBoard() {
             const board = document.getElementById('board');
             board.innerHTML = '';
-            
-            // ترتيب عشوائي للمربعات في كل مرة
             const shuffled = [...boardData].sort(() => Math.random() - 0.5);
 
             shuffled.forEach((item) => {
                 const cell = document.createElement('div');
                 cell.classList.add('cell');
-                cell.dataset.type = item; // 1 قنبلة، 0 كنز
+                cell.dataset.type = item;
                 cell.addEventListener('click', () => revealCell(cell));
                 board.appendChild(cell);
             });
@@ -166,45 +161,37 @@
             if (gameOver || cell.classList.contains('revealed')) return;
 
             cell.classList.add('revealed');
-            
-            // تشغيل صوت الضغطة/الكليك في كل محاولة
             sounds.click.currentTime = 0;
             sounds.click.play().catch(e => {});
 
             if (cell.dataset.type === "1") {
-                // قنبلة -> خسر!
                 cell.classList.add('bomb');
                 cell.innerHTML = "💀";
                 document.getElementById('gameTitle').innerHTML = "للأسف فرقعت فيك القنبلة! 💥";
                 gameOver = true;
                 sounds.lose.play().catch(e => {});
                 saveData("خسران 💀");
-                alert("بوم! 💥 خسرنا الدور ده، حاول تاني!");
             } else {
-                // كنز -> كسب نقطة
                 cell.innerHTML = "💎";
                 score++;
                 document.getElementById('scoreDisplay').innerHTML = `المحاولات الناجحة: ${score} / ${targetWin}`;
 
                 if (score === targetWin) {
-                    document.getElementById('gameTitle').innerHTML = "مبروووك كسبت الكنز بالكامل! 🎉🏆";
+                    document.getElementById('gameTitle').innerHTML = "🏆 مبروك كسبت الكنز والتسقيف! 🎉";
                     gameOver = true;
-                    sounds.win.play().catch(e => {});
+                    sounds.win.play().catch(e => {}); // تشغيل صوت التسقيف والتشجيع هنا!
                     saveData("كسبان 🎉");
-                    alert("يا لعيب!! كسبت معانا وبجدارة 🥳");
                 }
             }
         }
 
         function saveData(result) {
-            const newPlayer = { name: pName, role: pRole, msg: pMsg, status: result };
+            const newPlayer = { name: pName, role: pRole, msg: pMsg || 'بدون رسالة', status: result };
             localDB.push(newPlayer);
             localStorage.setItem('game_logs', JSON.stringify(localDB));
-            
-            // هنا يربط الـ Firebase المباشر بتاعك إذا أحببتِ لاحقاً تلقائياً
         }
 
-        // لوحة التحكم السرية ومفتوحة برقم 1234
+        // لوحة التحكم المصلحة لتعرض البيانات فوراً بدون تعليق
         function openSecretPanel() {
             const pass = prompt("اكتبي الرقم السري لـ رحومة لفتح لوحة التحكم: 🕵️‍♀️");
             if (pass === "1234") {
@@ -212,20 +199,20 @@
                 document.getElementById('gameScreen').classList.add('hidden');
                 document.getElementById('dashboardScreen').classList.remove('hidden');
                 
-                // تحديث جدول البيانات
                 const tableBody = document.getElementById('reportTable');
-                tableBody.innerHTML = '';
+                tableBody.innerHTML = ''; // مسح جملة "جاري التحميل" لتظهر البيانات فوراً
                 
                 if(localDB.length === 0) {
-                    tableBody.innerHTML = `<tr><td colspan="4">لسة مفيش حد دخل لعب لغاية دلوقتي 😢</td></tr>`;
+                    tableBody.innerHTML = `<tr><td colspan="4" style="padding:20px; color:#aaa;">لسة مفيش حد دخل لعب لغاية دلوقتي 😢</td></tr>`;
                 } else {
-                    localDB.reverse().forEach(p => {
+                    // عرض البيانات مرتبة من الأحدث للأقدم
+                    [...localDB].reverse().forEach(p => {
                         tableBody.innerHTML += `
                             <tr>
                                 <td><b>${p.name}</b></td>
                                 <td>${p.role}</td>
                                 <td>${p.status}</td>
-                                <td style="color: #ff007f;">${p.msg || 'بدون رسالة'}</td>
+                                <td style="color: #ff007f; font-weight:bold;">${p.msg}</td>
                             </tr>
                         `;
                     });
@@ -238,7 +225,6 @@
         function closeDashboard() {
             document.getElementById('dashboardScreen').classList.add('hidden');
             document.getElementById('loginScreen').classList.remove('hidden');
-            // إعادة تصفير اللعبة للدور الجديد
             score = 0;
             gameOver = false;
             document.getElementById('scoreDisplay').innerHTML = `المحاولات الناجحة: 0 / 5`;
