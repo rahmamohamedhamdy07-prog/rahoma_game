@@ -24,11 +24,15 @@ body{font-family:'Cairo',sans-serif;background:#0a0a1a;min-height:100vh;display:
 .title{font-size:1.85rem;font-weight:900;color:#ff6b9d}
 .bubble{background:rgba(255,255,255,.07);border:1px solid rgba(255,107,157,.25);border-radius:20px;padding:1.2rem 1.6rem;color:#ffe0f0;font-size:1rem;line-height:2;font-weight:600;width:100%}
 .bubble.gold{border-color:rgba(251,191,36,.3);background:rgba(251,191,36,.06);color:#fff8e1}
-.name-input{width:100%;padding:.9rem 1.4rem;border-radius:50px;border:2px solid rgba(255,107,157,.4);background:rgba(255,255,255,.06);color:white;font-family:'Cairo',sans-serif;font-size:1.15rem;font-weight:700;text-align:center;outline:none;transition:border-color .2s}
+
+.input-wrapper { width:100%; display:flex; flex-direction:column; gap:10px; text-align:right; }
+.input-label { color: rgba(255,255,255,0.6); font-size: 0.9rem; font-weight: 700; padding-right: 5px; }
+.name-input{ width:100%; padding:.9rem 1.4rem; border-radius:15px; border:2px solid rgba(255,107,157,.4); background:rgba(255,255,255,.06); color:white; font-family:'Cairo',sans-serif; font-size:1.1rem; font-weight:700; outline:none; transition:border-color .2s}
 .name-input::placeholder{color:rgba(255,255,255,.3)}
 .name-input:focus{border-color:#ff6b9d;background:rgba(255,107,157,.07)}
-.btn-main{background:#ff4d7e;color:white;border:none;padding:.95rem 2.5rem;border-radius:50px;font-family:'Cairo',sans-serif;font-size:1.05rem;font-weight:900;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 6px 24px rgba(255,77,126,.4)}
-.btn-main:hover{transform:scale(1.06)}
+
+.btn-main{background:#ff4d7e;color:white;border:none;padding:.95rem 2.5rem;border-radius:50px;font-family:'Cairo',sans-serif;font-size:1.05rem;font-weight:900;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 6px 24px rgba(255,77,126,.4); width:100%;}
+.btn-main:hover{transform:scale(1.04)}
 .btn-main:active{transform:scale(.96)}
 .btn-green{background:#16a34a;color:white;border:none;padding:.95rem 2.5rem;border-radius:50px;font-family:'Cairo',sans-serif;font-size:1.05rem;font-weight:900;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 6px 24px rgba(22,163,74,.4)}
 .btn-green:hover{transform:scale(1.06)}
@@ -62,26 +66,24 @@ body{font-family:'Cairo',sans-serif;background:#0a0a1a;min-height:100vh;display:
 .card-back-g::after{content:'🎁';font-size:1.8rem}
 .card-front-g{background:#0f1f0a;border:1.5px solid #fbbf24;transform:rotateY(180deg);font-size:1.1rem;flex-direction:column;gap:3px}
 .result-big{font-size:5rem;animation:bounce 1s infinite}
-.love-footer{color:rgba(255,255,255,.45);font-size:.85rem;font-weight:600;margin-top:.5rem;position:relative}
+.love-footer{color:rgba(255,255,255,.45);font-size:.85rem;font-weight:600;margin-top:.5rem;position:relative; padding-bottom: 10px;}
 .confetti-p{position:fixed;width:9px;height:9px;animation:confFall linear forwards;pointer-events:none;z-index:999}
 @keyframes confFall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
 
-/* ستايل لوحة التحكم السرية بنفس روح الألوان */
-.secret-dot { position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); width: 25px; height: 25px; background: rgba(255,255,255,0.01); cursor: pointer; z-index: 999; }
-.dashboard-overlay { background: rgba(10, 10, 26, 0.98); position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; z-index: 1000; overflow-y: auto; border: 2px solid #ff6b9d; box-shadow: 0 0 30px rgba(255,107,157,0.3); }
-.dash-header { color: #fff; font-size: 1.4rem; font-weight: 900; margin-bottom: 15px; background: #ff4d7e; width: 100%; padding: 12px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(255,77,126,0.3); }
-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.9rem; color: #ffe0f0; }
-th, td { border: 1px solid rgba(255,107,157,0.25); padding: 12px 8px; text-align: center; }
+.secret-dot { position: absolute; bottom: -25px; left: 0; width: 100%; height: 35px; background: rgba(255,255,255,0.01); cursor: pointer; z-index: 999; }
+.dashboard-overlay { background: rgba(10, 10, 26, 0.99); position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; z-index: 1000; overflow-y: auto; border: 2px solid #ff6b9d; box-shadow: 0 0 30px rgba(255,107,157,0.3); }
+.dash-header { color: #fff; font-size: 1.3rem; font-weight: 900; margin-bottom: 15px; background: #ff4d7e; width: 100%; padding: 12px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(255,77,126,0.3); }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; color: #ffe0f0; }
+th, td { border: 1px solid rgba(255,107,157,0.25); padding: 10px 6px; text-align: center; word-break: break-word; }
 th { background: rgba(255,107,157,0.15); color: #ff6b9d; font-weight: 900; }
 tr:nth-child(even) { background: rgba(255,255,255,0.03); }
-.close-dash-btn { background: #ff4757; color: white; border: none; padding: .7rem 2rem; border-radius: 50px; font-family: 'Cairo', sans-serif; font-size: .95rem; font-weight: 700; cursor: pointer; margin-top: auto; width: 100%; box-shadow: 0 4px 15px rgba(255,71,87,0.4); }
+.close-dash-btn { background: #ff4757; color: white; border: none; padding: .8rem 2rem; border-radius: 50px; font-family: 'Cairo', sans-serif; font-size: .95rem; font-weight: 700; cursor: pointer; margin-top: 15px; width: 100%; box-shadow: 0 4px 15px rgba(255,71,87,0.4); }
 </style>
 </head>
 <body>
 <div class="stars-bg" id="stars"></div>
 <div id="app">
 
-<!-- 1. INTRO -->
 <div id="s-intro" class="screen active">
   <div class="avatar">👩‍🏫</div>
   <div class="title">بشمهندسة رحومة</div>
@@ -89,20 +91,27 @@ tr:nth-child(even) { background: rgba(255,255,255,0.03); }
     أهلاً بيك يا حبيبي 🌸<br>
     أنا بقا رحومة — مهندسة مرار طافح 😤<br>
     هنلعب أنا وأنت لعبة صغنونة<br>
-    بس اكتب اسمك يا باشا 👇
+    اكتب بياناتك يا باشا عشان ندخل 👇
   </div>
-  <input class="name-input" id="nameInput" placeholder="اسمك هنا..." maxlength="20"
-    oninput="checkName()" onkeydown="if(event.key==='Enter')goNext()">
-  <button class="btn-main" id="nextBtn" onclick="goNext()" style="opacity:.35;pointer-events:none">يلا 🚀</button>
+  
+  <div class="input-wrapper">
+    <label class="input-label">اسمك الجميل:</label>
+    <input class="name-input" id="nameInput" placeholder="اكتب اسمك هنا..." maxlength="20" oninput="checkInputs()">
+  </div>
+
+  <div class="input-wrapper">
+    <label class="input-label">رسالة من قلبك لرحومة ❤️:</label>
+    <input class="name-input" id="msgInput" placeholder="دعوة حلوة أو كلمة تشجيع..." maxlength="100" oninput="checkInputs()" style="font-size:0.95rem;">
+  </div>
+
+  <button class="btn-main" id="nextBtn" onclick="goNext()" style="opacity:.35;pointer-events:none; margin-top: 5px;">يلا 🚀</button>
   
   <div class="love-footer">
     وبحبك يا صديقي اللي لعب اللعبة 🌸
-    <!-- الزرار المخفي السحري تحت الكلمة مباشرة -->
     <div class="secret-dot" onclick="openSecretPanel()"></div>
   </div>
 </div>
 
-<!-- 2. CHOICE -->
 <div id="s-choice" class="screen">
   <div style="font-size:3.5rem;animation:bounce 2s infinite">👩‍🏫</div>
   <div class="bubble" id="choiceMsg"></div>
@@ -112,7 +121,6 @@ tr:nth-child(even) { background: rgba(255,255,255,0.03); }
   </div>
 </div>
 
-<!-- 3A. STUDENT INTRO -->
 <div id="s-student-intro" class="screen">
   <div style="font-size:4rem;animation:bounce 1s infinite">📚</div>
   <div class="big-name red" id="studIntroName"></div>
@@ -127,7 +135,6 @@ tr:nth-child(even) { background: rgba(255,255,255,0.03); }
   <button class="btn-main" onclick="startStudentGame()">العب 🎮</button>
 </div>
 
-<!-- 3B. GRAD INTRO -->
 <div id="s-grad-intro" class="screen">
   <div style="font-size:4rem;animation:bounce 1s infinite">🎊</div>
   <div class="big-name gold" id="gradIntroName"></div>
@@ -141,7 +148,6 @@ tr:nth-child(even) { background: rgba(255,255,255,0.03); }
   <button class="btn-green" onclick="startGradGame()">العب معايا 🎁</button>
 </div>
 
-<!-- 4A. STUDENT GAME -->
 <div id="s-student-game" class="screen">
   <div style="color:#ff6b9d;font-size:.95rem;font-weight:900">🎴 ادور على الأزواج — عندك 15 فرصة</div>
   <div class="game-header">
@@ -152,7 +158,6 @@ tr:nth-child(even) { background: rgba(255,255,255,0.03); }
   <div class="cards-4" id="sGrid"></div>
 </div>
 
-<!-- 4B. GRAD GAME -->
 <div id="s-grad-game" class="screen">
   <div style="color:#fbbf24;font-size:.95rem;font-weight:900">🎁 افتح الهدايا — ادور على القلب!</div>
   <div class="game-header">
@@ -164,7 +169,6 @@ tr:nth-child(even) { background: rgba(255,255,255,0.03); }
   <div id="gMsg" style="color:#fde68a;font-size:.9rem;font-weight:700;min-height:24px"></div>
 </div>
 
-<!-- 5A. STUDENT WIN -->
 <div id="s-student-win" class="screen">
   <div class="result-big">🏆</div>
   <div class="big-name green" id="sWinName"></div>
@@ -180,7 +184,6 @@ tr:nth-child(even) { background: rgba(255,255,255,0.03); }
   <button class="btn-ghost" onclick="startStudentGame()">تاني 🔄</button>
 </div>
 
-<!-- 5B. STUDENT LOSE -->
 <div id="s-student-lose" class="screen">
   <div class="result-big">💀</div>
   <div class="big-name red" id="sLoseName"></div>
@@ -195,7 +198,6 @@ tr:nth-child(even) { background: rgba(255,255,255,0.03); }
   <button class="btn-ghost" onclick="startStudentGame()">فرصة تانية 🙏</button>
 </div>
 
-<!-- 5C. GRAD WIN -->
 <div id="s-grad-win" class="screen">
   <div class="result-big">🥰</div>
   <div class="big-name gold" id="gWinName"></div>
@@ -211,7 +213,6 @@ tr:nth-child(even) { background: rgba(255,255,255,0.03); }
   <button class="btn-ghost" onclick="startGradGame()">تاني 🔄</button>
 </div>
 
-<!-- 5D. GRAD LOSE -->
 <div id="s-grad-lose" class="screen">
   <div class="result-big">😂</div>
   <div class="big-name red" id="gLoseName"></div>
@@ -226,20 +227,19 @@ tr:nth-child(even) { background: rgba(255,255,255,0.03); }
   <button class="btn-ghost" onclick="startGradGame()">فرصة تانية 😅</button>
 </div>
 
-<!-- لوحة التحكم المنبثقة المدمجة بالديزاين الجديد -->
 <div id="dashboardOverlay" class="dashboard-overlay" style="display: none;">
   <div class="dash-header">📊 لوحة تحكم البشمهندسة رحومة</div>
-  <div style="overflow-x: auto; width: 100%;">
+  <div style="overflow-x: auto; width: 100%; max-height: 70vh;">
     <table>
       <thead>
         <tr>
           <th>الاسم</th>
           <th>الفئة</th>
           <th>النتيجة</th>
+          <th>الرسالة ❤️</th>
         </tr>
       </thead>
       <tbody id="reportTable">
-        <!-- بتظهر البيانات هنا علطول -->
       </tbody>
     </table>
   </div>
@@ -250,20 +250,46 @@ tr:nth-child(even) { background: rgba(255,255,255,0.03); }
 
 <script>
 let playerName='';
-let playerType=''; // لحفظ نوع الفئة
+let playerMsg='';
+let playerType=''; 
 let sFlipped=[],sMat=0,sTries=0,sLock=false;
 const MAXS=15;
 const emojis=['📚','💡','✏️','📐','🖥️','🔬','⚡','🧮'];
 
-// تعريف الأصوات بأعلى جودة ومستوى صوت 100%
-const sounds = {
-  click: new Audio("https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg"),
-  win: new Audio("https://actions.google.com/sounds/v1/human/applause_coarse.ogg") // صوت التسقيف والتشجيع العالي جداً 👏👏🎉
-};
-Object.values(sounds).forEach(sound => sound.volume = 1.0);
+// نظام توليد صوتي داخلي متطور ومضمون 100% بدون ملفات خارجية
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-// قاعدة البيانات المحلية
-let localDB = JSON.parse(localStorage.getItem('game_logs_v2')) || [];
+function playTone(freq, type, duration) {
+  try {
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+    osc.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration);
+  } catch(e) {}
+}
+
+function playClickSound() {
+  playTone(600, 'sine', 0.08); // صوت نقرة خفيفة تفاعلية للكروت
+}
+
+function playWinSound() {
+  // تتابع نغمات احتفالي صاعد ومبهج جداً يعوض التسقيف 🥳🎉
+  let now = audioCtx.currentTime;
+  const notes = [440, 554, 659, 880, 1109, 1318];
+  notes.forEach((freq, index) => {
+    setTimeout(() => {
+      playTone(freq, 'triangle', 0.25);
+    }, index * 100);
+  });
+}
+
+let localDB = JSON.parse(localStorage.getItem('game_logs_v3')) || [];
 
 function makeStars(){
   const c=document.getElementById('stars');
@@ -281,16 +307,26 @@ function show(id){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function checkName(){
-  const v=document.getElementById('nameInput').value.trim();
-  const btn=document.getElementById('nextBtn');
-  btn.style.opacity=v?'1':'.35';
-  btn.style.pointerEvents=v?'auto':'none';
+function checkInputs(){
+  const nameVal = document.getElementById('nameInput').value.trim();
+  const msgVal = document.getElementById('msgInput').value.trim();
+  const btn = document.getElementById('nextBtn');
+  
+  if(nameVal && msgVal) {
+    btn.style.opacity = '1';
+    btn.style.pointerEvents = 'auto';
+  } else {
+    btn.style.opacity = '.35';
+    btn.style.pointerEvents = 'none';
+  }
 }
 
 function goNext(){
+  if (audioCtx.state === 'suspended') audioCtx.resume(); // تفعيل الصوت مع أول تفاعل
   playerName=document.getElementById('nameInput').value.trim();
-  if(!playerName)return;
+  playerMsg=document.getElementById('msgInput').value.trim();
+  if(!playerName || !playerMsg) return;
+  
   document.getElementById('choiceMsg').innerHTML=`يا ${playerName}! 👋<br>قبل ما ندخل قولي أنت...<br>إيه وضعك دلوقتي؟ 🤔`;
   show('s-choice');
 }
@@ -307,11 +343,10 @@ function goGrad(){
   show('s-grad-intro');
 }
 
-// دالة حفظ البيانات التلقائية في اللوحة
 function savePlayerResult(status) {
-  const newLog = { name: playerName, type: playerType, result: status };
+  const newLog = { name: playerName, type: playerType, result: status, msg: playerMsg };
   localDB.push(newLog);
-  localStorage.setItem('game_logs_v2', JSON.stringify(localDB));
+  localStorage.setItem('game_logs_v3', JSON.stringify(localDB));
 }
 
 // ===== STUDENT GAME =====
@@ -335,8 +370,7 @@ function startStudentGame(){
 function sFlip(card){
   if(sLock||card.classList.contains('flipped')||card.classList.contains('matched'))return;
   
-  sounds.click.currentTime = 0;
-  sounds.click.play().catch(e=>{}); // صوت ضغطة الكارت
+  playClickSound(); // تشغيل صوت الكليك فوراً
   
   card.classList.add('flipped');sFlipped.push(card);
   if(sFlipped.length===2){
@@ -351,8 +385,7 @@ function sFlip(card){
         if(sMat===8)setTimeout(()=>{
           document.getElementById('sWinName').textContent=`شاطر يا ${playerName}! 🏆`;
           show('s-student-win');
-          sounds.win.currentTime = 0;
-          sounds.win.play().catch(e=>{}); // تشغيل صوت التسقيف العالي هنا 🎉
+          playWinSound(); // نغمة الفوز القوية 🎉
           launchConfetti();
           savePlayerResult("كسبان (طالب) 🏆");
         },400);
@@ -395,8 +428,7 @@ function startGradGame(){
     c.onclick=function(){
       if(c.classList.contains('flipped'))return;
       
-      sounds.click.currentTime = 0;
-      sounds.click.play().catch(e=>{}); // صوت ضغطة الكارت
+      playClickSound(); // صوت كليك الخريج
       
       c.classList.add('flipped');opened++;
       if(p.isHeart)hearts++;
@@ -410,8 +442,7 @@ function startGradGame(){
           if(hearts>=2){
             document.getElementById('gWinName').textContent=`يا ${playerName}! 🥰`;
             show('s-grad-win');
-            sounds.win.currentTime = 0;
-            sounds.win.play().catch(e=>{}); // تشغيل صوت التسقيف العالي هنا 🎉
+            playWinSound(); // نغمة الفوز للخريج
             launchConfetti('#fbbf24');
             savePlayerResult("كسبان (خريج) 🥰");
           } else {
@@ -438,7 +469,6 @@ function launchConfetti(color){
   }
 }
 
-// دالة فتح لوحة التحكم السرية
 function openSecretPanel() {
   const pass = prompt("اكتبي الرقم السري لـ رحومة لفتح لوحة التحكم: 🕵️‍♀️");
   if (pass === "1234") {
@@ -447,15 +477,15 @@ function openSecretPanel() {
     tableBody.innerHTML = ''; 
     
     if(localDB.length === 0) {
-      tableBody.innerHTML = `<tr><td colspan="3" style="padding:20px; color:rgba(255,255,255,0.4);">لسة مفيش حد دخل لعب لغاية دلوقتي 😢</td></tr>`;
+      tableBody.innerHTML = `<tr><td colspan="4" style="padding:20px; color:rgba(255,255,255,0.4);">لسة مفيش حد دخل لعب لغاية دلوقتي 😢</td></tr>`;
     } else {
-      // رص الأسماء من الأحدث للأقدم
       [...localDB].reverse().forEach(player => {
         tableBody.innerHTML += `
           <tr>
             <td><b style="color: #ff6b9d;">${player.name}</b></td>
             <td>${player.type}</td>
             <td>${player.result}</td>
+            <td style="color:#4ade80; font-weight:bold;">${player.msg || 'بدون رسالة'}</td>
           </tr>
         `;
       });
